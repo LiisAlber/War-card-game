@@ -17,6 +17,7 @@ The goal of this project is to implement the card game of War using Object-Orien
 * If the additional face-up cards are also of the same value, this process repeats until a player wins.
 * When a player wins a turn or a war, they take all the cards that were on the table and add them to the bottom of their deck, maintaining the order of the cards.
 * The game continues until one player has won all the cards.
+* After every turn the program should present the remaining cards of each player.
 
 
 ## Implementation
