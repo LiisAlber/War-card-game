@@ -6,8 +6,7 @@ def main():
     table.deal_cards()
     table.play_all()
 
-def print_underline(string, line):
-    print('\n{}\n{}'.format(string, line * len(string)))
+
 
 
 #should represent the table on which the game is played 
@@ -73,6 +72,24 @@ class Table:
 #each player should have a name and a hand of cards
 #should have methods to drop a card from their hand into a pot, drop bonus cards into a pot, give cards to a player, and show their hand
 class Player:
+    def __init__ (self, hand, name):
+        self.hand, self.name = hand, name
+
+    def drop_card(self, collection):
+        if self.hand.has_cards:
+            collection.add_card(self.hand.take_top())
+
+    def drop_bonus(self, collection, count):
+        collection.add_bonus(self.hand.cards[:count])
+        self.hand.cards = self.hand.cards[count:]
+
+    def show_hand(self):
+        print(self.name, 'has', self.hand)
+
+    def give_cards(self, cards):
+        self.hand.add_all(cards)
+
+
 
 
 #represent the cards held by a player, 
@@ -91,6 +108,11 @@ class Deck:
 # should represent a single playing card from the deck
 # each card should have a rank and a suit
 class Card:
+    SUITE = 'H D S C'.split()
+    RANK = '2 3 4 5 6 7 8 9 10 J Q K A'.split()
+
+    def __init__(self, suite, rank):
+        self.suite, self.rank = suite, rank
 
 
 #represents a round of the game
