@@ -1,5 +1,6 @@
 import random
 
+
 def main():
     table = Table(['Player 1', 'Player 2'])
     table.deal_cards()
