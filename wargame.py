@@ -10,9 +10,9 @@ def main():
 def print_underline(string, line):
     print('\n{}\n{}'.format(string, line * len(string)))
 
-#should represent the table on which the game is played 
-# should be responsible for managing the deck of cards, dealing cards to the players, and overseeing the game rounds
-# should have methods to play one round of the game, count the rounds, play all the rounds until the game is finished
+# represent the table on which the game is played 
+# be responsible for managing the deck of cards, dealing cards to the players, and overseeing the game rounds
+# have methods to play one round of the game, count the rounds, play all the rounds until the game is finished
 # show the winner of the game
 class Table:
 
@@ -189,6 +189,5 @@ class Round:
             if card.value == self.best:
                 yield player
 
-                
 if __name__ == '__main__':
     main()
