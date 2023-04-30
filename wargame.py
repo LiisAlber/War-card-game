@@ -16,6 +16,8 @@ def print_underline(string, line):
 # show the winner of the game
 class Table:
 
+    MAX_ROUNDS = 500
+
     def __init__(self, players):
         self.players = [Player(name, Hand()) for name in players]
         self.deck = Deck()
@@ -26,6 +28,9 @@ class Table:
         self.deck.setup_hands(self.players)
 
     def play_once(self, tied=None): #one round
+        if self.rounds >= self.MAX_ROUNDS:
+            self.end_game()
+            return
         if tied is None:
             self.count_round()
         collection = Round()
@@ -40,6 +45,12 @@ class Table:
             winner = self.play_once(collection.tied)
             collection.reward(winner)
         return winner
+    
+    def end_game(self):
+        print("Max rounds reached. Game over.")
+        print("Calculating winner based on number of cards remaining...")
+        winner = max(self.players, key=lambda player: len(player.hand.cards))
+        print(f"{winner.name} wins with {len(winner.hand.cards)} cards remaining!")
 
     def count_round(self):  #counts the number of rounds played
         self.rounds += 1
@@ -47,9 +58,14 @@ class Table:
         for player in self.players:
             print(player.name, 'has', len(player.hand.cards), 'cards')
 
-    def play_all(self):     #plays all the rounds of the game until a winner is found
-        while not self.finished:
+    def play_all(self, max_rounds=500):     #plays all the rounds of the game until a winner is found
+        for i in range(max_rounds):
+            if self.finished:
+                break
             self.play_once()
+        else:
+            self.end_game()
+
         self.show_winner()
 
     def show_winner(self):      #prints a message displaying the winner
