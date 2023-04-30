@@ -98,11 +98,36 @@ class Player:
 # add a list of cards to the hand, 
 # check if the hand has any cards left
 class Hand:
+    def __init__(self):     
+        self.cards = []
+
+    def __str__(self):      
+        return ', '.join(map(str, self.cards))
+    
+    def add_card(self, card):       #add card to the hand
+        self.cards.append(card)
+
+    def take_top(self):     #removes top card
+        return self.cards.pop(0)
+    
+    
+    @property  #needs to be property?
+    def has_cards(self):       
+        return bool(self.cards)
+    
+
 
 
 #should represent a standard deck of 52 playing cards
 #should have methods to create the deck and shuffle the deck
 class Deck:
+    def __init__(self):     
+        self.cards = # needs to finish
+
+    def shuffle(self):     
+        random.shuffle(self.cards)
+
+    def setup_hands(self, players):     #sets up the players' hands by dealing cards from the deck to each hand
 
 
 # should represent a single playing card from the deck
@@ -114,10 +139,36 @@ class Card:
     def __init__(self, suite, rank):
         self.suite, self.rank = suite, rank
 
+    def __str__(self):      #returns a string representation of the card, in the format "rank-suit"
+        return '{}-{}'.format(self.rank, self.suite)
+    
+    #@property?
+    def value(self):        #returns the value of the card based on its rank
+        return self.RANKS.index(self.rank)
+
 
 #represents a round of the game
 #has methods to manage the cards played by the players in the round
 #determine the winner of the round, and reward the winner with the cards played in the round
 class Round:
 
+    def __init__(self):     #empty lists of cards, players, and bonus cards
+        
 
+    def add_card(self, card, player):       #adds a card to the list of cards played in the current round
+                                            #the player who played it to the list of players in the round
+        
+
+    def add_bonus(self, cards):         #adds a list of bonus cards to the list of bonus cards played in the current round
+        
+
+    @property                           #winner of the round
+    def winner(self): 
+
+
+    def show_round(self):               #message: cards played by each player in the round
+
+
+    def reward(self, player):           #gives the cards and bonus cards played in the round to the winning player
+
+    def tied(self):                     #generator that yields the tied players
